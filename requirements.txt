@@ -1,0 +1,94 @@
+# ============================================================================
+# requirements.txt
+# ============================================================================
+# Python dependencies for the mineral-identification system.
+#
+# Installation:
+#     python -m pip install --upgrade pip
+#     python -m pip install -r requirements.txt
+#
+# Recommended Python version: 3.10 or newer (uses `X | Y` type syntax and
+# `from __future__ import annotations` in some modules).
+#
+# For a fully reproducible environment, pin the exact versions by running:
+#     pip freeze > requirements.lock.txt
+# ============================================================================
+
+
+# ----------------------------------------------------------------------------
+# Core numerical / scientific stack
+# ----------------------------------------------------------------------------
+# Used by: src/analysis/vectorize.py, src/analysis/compare.py,
+#          scripts/generate_metric_comparison.py, scripts/compare_metrics.py,
+#          scripts/generate_presentation_figures.py,
+#          scripts/generate_project_figures.py
+numpy>=1.24,<2.0
+scipy>=1.10,<2.0
+
+# ----------------------------------------------------------------------------
+# Image processing
+# ----------------------------------------------------------------------------
+# Used by: src/analysis/vectorize.py, src/parsers/docx_parser.py,
+#          scripts/generate_diagrams.py (grayscale spectrum panel)
+#
+# Install note:
+#   opencv-python is the standard build. If you run on a headless server,
+#   you may instead use `opencv-python-headless` (same API, no GUI deps).
+opencv-python>=4.8,<5.0
+
+# Pillow is a transitive dependency of matplotlib and python-docx for
+# image I/O. Pinning it explicitly avoids version drift across platforms.
+Pillow>=10.0,<11.0
+
+# ----------------------------------------------------------------------------
+# Database / ORM
+# ----------------------------------------------------------------------------
+# Used by: src/database/connection.py, src/database/models.py,
+#          src/database/queries.py, src/analysis/compare.py,
+#          scripts/build_reference_database.py, scripts/compare_metrics.py
+#
+# SQLAlchemy 2.0 is required for the `select()` / `session.scalars()`
+# patterns used throughout the enhanced modules.
+SQLAlchemy>=2.0,<3.0
+
+# ----------------------------------------------------------------------------
+# DOCX parsing
+# ----------------------------------------------------------------------------
+# Used by: src/parsers/docx_parser.py, scripts/generate_diagrams.py
+#
+# python-docx reads .docx files, exposes embedded images via
+# document.part.rels, and is the source of the RELATIONSHIP_TYPE constant
+# used for image detection.
+python-docx>=1.1,<2.0
+
+# ----------------------------------------------------------------------------
+# Plotting / visualization
+# ----------------------------------------------------------------------------
+# Used by: scripts/generate_diagrams.py,
+#          scripts/generate_metric_comparison.py,
+#          scripts/generate_presentation_figures.py,
+#          scripts/generate_project_figures.py,
+#          scripts/compare_metrics.py
+#
+# matplotlib is used with the "Agg" backend in all scripts (headless safe).
+# The `matplotlib.use("Agg")` call happens before importing pyplot, so no
+# GUI dependencies are required.
+matplotlib>=3.7,<4.0
+
+# ----------------------------------------------------------------------------
+# Testing
+# ----------------------------------------------------------------------------
+# Used by: tests/ (pytest-based test suite)
+pytest>=7.4,<9.0
+
+# pytest-cov produces the coverage reports referenced by the
+# presentation figures ("79% Code Coverage").
+pytest-cov>=4.1,<6.0
+
+# ----------------------------------------------------------------------------
+# Optional: type checking
+# ----------------------------------------------------------------------------
+# Not required at runtime, but strongly recommended during development
+# because every enhanced module ships with full type hints.
+# mypy>=1.8,<2.0
+# types-requests>=2.31

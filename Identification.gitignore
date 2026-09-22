@@ -1,0 +1,179 @@
+# ============================================================================
+# .gitignore
+# ============================================================================
+# Files and directories excluded from version control.
+#
+# Rule of thumb:
+#   - Commit source code, tests, documentation, and configuration templates.
+#   - Do NOT commit generated data, downloaded files, secrets, or IDE state.
+#
+# Verify with:
+#     git status --ignored
+# ============================================================================
+
+
+# ----------------------------------------------------------------------------
+# Python — bytecode and packaging
+# ----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+
+# ----------------------------------------------------------------------------
+# Testing and coverage
+# ----------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+.tox/
+.nox/
+
+
+# ----------------------------------------------------------------------------
+# Type checking and linting
+# ----------------------------------------------------------------------------
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+
+# ----------------------------------------------------------------------------
+# Project data — DO NOT commit
+# ----------------------------------------------------------------------------
+# The SQLite reference database. Regenerate with:
+#     python scripts/build_reference_database.py
+minerales_eds.db
+minerales_eds.db-journal
+minerales_eds.db-wal
+minerales_eds.db-shm
+
+# Downloaded public reference collections. Regenerate with:
+#     python scripts/download_sfu_spectra.py --source all
+external_spectra/
+
+# Generated documentation figures. Regenerate with any
+#     python scripts/generate_*.py
+diagrams/
+
+# Temporary image extraction folder (legacy; the current pipeline is
+# fully in-memory, but old runs may still have produced files here).
+data/temp_images/
+
+# Validation reports produced by scripts/compare_metrics.py
+reports/
+metric_comparison_results.json
+
+
+# ----------------------------------------------------------------------------
+# Reference and validation data
+# ----------------------------------------------------------------------------
+# These folders contain large numbers of .docx files that are specific to
+# the study. Keep the folders tracked (via .gitkeep) but ignore the files.
+#
+# If your institution requires the reference data to be public, remove the
+# following two lines and commit the .docx files directly.
+reference_data/*.docx
+tests/test_data/*.docx
+
+# Keep the folders themselves in version control.
+!reference_data/.gitkeep
+!tests/test_data/.gitkeep
+
+
+# ----------------------------------------------------------------------------
+# Jupyter / IPython
+# ----------------------------------------------------------------------------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+
+# ----------------------------------------------------------------------------
+# Secrets and environment variables — NEVER commit
+# ----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+credentials.json
+
+
+# ----------------------------------------------------------------------------
+# IDE and editor state
+# ----------------------------------------------------------------------------
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+
+# ----------------------------------------------------------------------------
+# Operating system files
+# ----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+
+# ----------------------------------------------------------------------------
+# Logs and temporary files
+# ----------------------------------------------------------------------------
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+
+
+# ----------------------------------------------------------------------------
+# Large binary artifacts
+# ----------------------------------------------------------------------------
+# Many journals require individual source files, not compressed archives.
+# Excluding these also prevents accidental uploads of build artifacts.
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.pdf
+
+
+# ----------------------------------------------------------------------------
+# Distribution-specific (uncomment if you package for PyPI)
+# ----------------------------------------------------------------------------
+# .eggs/
+# pip-wheel-metadata/
+# site/
+# wheels/
